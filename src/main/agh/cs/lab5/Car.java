@@ -12,20 +12,20 @@ public class Car {
 
     public Car(IWorldMap map){
         Position defaultPosition = new Position(2, 2);
-        if(map.canMoveTo(defaultPosition) && !map.isOccupied(defaultPosition)) {
+        if(map.canMoveTo(defaultPosition)) {
             this.orientation = MapDirection.NORTH;
             this.position = defaultPosition;
         }
     }
     public Car(IWorldMap map, Position initialPosition){
-        if(map.canMoveTo(initialPosition) && !map.isOccupied(initialPosition)) {
+        if(map.canMoveTo(initialPosition)) {
             this.orientation = MapDirection.NORTH;
             this.position = initialPosition;
         }
     }
     public Car(IWorldMap map, int x, int y){
         Position initialPosition = new Position(x, y);
-        if(map.canMoveTo(initialPosition) && !map.isOccupied(initialPosition)) {
+        if(map.canMoveTo(initialPosition)) {
             this.orientation = MapDirection.NORTH;
             this.position = initialPosition;
         }
@@ -77,7 +77,7 @@ public class Car {
             newPosition = this.position.add(delta);
         else
             newPosition = this.position.sub(delta);
-        if(map.canMoveTo(newPosition) && !map.isOccupied(newPosition))
+        if(map.canMoveTo(newPosition))
             this.position = newPosition;
     }
     public static void main(String[] args){

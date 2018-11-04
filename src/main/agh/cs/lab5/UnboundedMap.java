@@ -6,9 +6,8 @@ import java.util.List;
 /**
  * Created by Student33 on 2018-10-29.
  */
-public class UnboundedMap implements IWorldMap{
+public class UnboundedMap extends AbstractWorldMap{
     private List<HayStack> hayStacks;
-    private List<Car> cars = new ArrayList<Car>();
 
     public UnboundedMap(List<HayStack> hayStacksToPlace){
         this.hayStacks = hayStacksToPlace;
@@ -31,44 +30,17 @@ public class UnboundedMap implements IWorldMap{
         }
         return drawer.draw(lowerLeft, upperRight);
     }
-
     public boolean canMoveTo(Position position){
-        return true;
-    }
-    public boolean place(Car car){
-        if(!isOccupied(car.getPosition())){
-            cars.add(car);
-            return true;
-        }
-        else
-            return false;
-    }
-    public void run(MoveDirection[] directions){
-        for(int i = 0; i<directions.length; i++){
-            cars.get(i%cars.size()).move(directions[i], this);
-        }
-    }
-    public boolean isOccupied(Position position){
-        for(Car car: cars){
-            if(car.getPosition().equals(position))
-                return true;
-        }
-        for(HayStack stack: hayStacks){
-            if(stack.getPosition().equals(position))
-                return true;
-        }
-        return false;
+        return !this.isOccupied(position);
     }
     public Object objectAt(Position position){
-        for(Car car: cars){
-            if(car.getPosition().equals(position))
-                return car;
-        }
-        for(HayStack stack: hayStacks){
+        Object carAt = super.objectAt(position);
+        if(carAt != null)
+            return carAt;
+        for(HayStack stack: this.hayStacks){
             if(stack.getPosition().equals(position))
                 return stack;
         }
         return null;
     }
-
 }

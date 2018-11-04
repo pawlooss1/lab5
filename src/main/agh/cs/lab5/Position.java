@@ -14,8 +14,8 @@ public class Position {
     public String toString(){
         return "(" + this.x + "," + this.y + ")";
     }
-    public boolean smaller(Position p){
-        if(this.x <= p.x && this.y <= p.y)
+    public boolean smaller(Position other){
+        if(this.x <= other.x && this.y <= other.y)
             return true;
         else
             return false;
